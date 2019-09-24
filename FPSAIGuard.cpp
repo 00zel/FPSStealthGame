@@ -114,3 +114,16 @@ void AFPSAIGuard::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+void AFPSAIGuard::GetActorEyesViewPoint(FVector &Location, FRotator &Rotation) const
+{
+	GetPerceptionLocRot(Location, Rotation);
+
+}
+
+void AFPSAIGuard::GetPerceptionLocRot_Implementation(FVector &OutLocation, FRotator &OutRotation) const
+{
+	OutLocation = GetActorLocation() + FVector(0, 0, 50); 
+	OutRotation = GetActorRotation(); 
+
+}

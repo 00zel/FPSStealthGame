@@ -4,9 +4,6 @@
 #include "GameFramework/Character.h"
 #include "FPSAIGuard.generated.h"
 
-//Include GameFramework/Actor.h for GetActorEyesViewpoint
-// #include "GameFramework/Actor.h"
-
 class UPawnSensingComponent; 
 
 UENUM(BlueprintType)
@@ -25,6 +22,10 @@ class FPSGAME_API AFPSAIGuard : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AFPSAIGuard();
+
+	UFUNCTION(BlueprintNativeEvent, Category = "AIVariables | Character")
+	void GetPerceptionLocRot(FVector &OutLocation, FRotator &OutRotation) const; 
+	void GetPerceptionLocRot_Implementation(FVector &OutLocation, FRotator &OutRotation) const; 
 
 protected:
 	// Called when the game starts or when spawned
@@ -59,6 +60,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
-	//Add GetActorEyesViewpoint to replace PawnSensingComponent - do we need const override ?
-	// virtual void GetActorEyesViewpoint(FVector &Location, FRotator &Rotation);
+	virtual void GetActorEyesViewPoint(FVector &Location, FRotator &Rotation) const override;
 };

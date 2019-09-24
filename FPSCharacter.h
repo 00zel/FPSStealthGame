@@ -40,10 +40,6 @@ protected:
 public: //can be set from another c++ class 
 	AFPSCharacter();
 
-	UFUNCTION(BlueprintNativeEvent, Category = "AIVariables | Character")
-	void GetPerceptionLocRot(FVector &OutLocation, FRotator &OutRotation) const; 
-	void GetPerceptionLocRot_Implementation(FVector &OutLocation, FRotator &OutRotation) const; 
-
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category="Projectile")
 	TSubclassOf<AFPSProjectile> ProjectileClass;
@@ -59,6 +55,13 @@ public: //can be set from another c++ class
 	UPROPERTY(BlueprintReadOnly, Category = "Gameplay")
 	bool bIsCarryingObjective; 
 
+	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
+
+	UFUNCTION(BlueprintNativeEvent, Category = "AIVariables | Character")
+	void GetPerceptionLocRot(FVector &OutLocation, FRotator &OutRotation) const; 
+	void GetPerceptionLocRot_Implementation(FVector &OutLocation, FRotator &OutRotation) const; 
+
+
 protected: //function must be set in cpp 
 	
 	/** Fires a projectile. */
@@ -70,7 +73,6 @@ protected: //function must be set in cpp
 	/** Handles strafing movement, left and right */
 	void MoveRight(float Val);
 
-	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 
 public:
 	/** Returns Mesh1P subobject **/
